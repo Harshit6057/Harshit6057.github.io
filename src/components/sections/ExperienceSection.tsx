@@ -1,62 +1,72 @@
 "use client";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
-const EXPERIENCE = [
+const PROJECTS = [
   {
-    period:   "Jan 2026 – Jun 2026",
-    company:  "Ping IFF LLP",
-    location: "Chandigarh, India",
-    role:     "Software Engineering Intern",
-    type:     "Internship · 6 months",
-    mentor:   "Mr. Mohit Shrivastava (Founder & Designated Partner)",
-    description:
-      "Six-month project semester at an agile tech startup building the PingME ecosystem — a privacy-first platform using static QR codes and NFC smart-tags to protect personal contact data on physical assets. Contributed to live production systems across web, mobile, and data engineering.",
-    contributions: [
-      {
-        title: "PingME Website Ecosystem",
-        points: [
-          "Built and refactored six core modules of the live PingME web platform — Admin Panel, Home, About, Contact Us, Partners, and Products pages — using React 18, TypeScript, Tailwind CSS, and shadcn/ui.",
-          "Developed the Admin Panel (/admin) with Firestore live listeners (onSnapshot) for real-time order monitoring and route guards using Firebase Auth to restrict access to authenticated admins only.",
-          "Configured client-side local cache rules via the Firestore SDK to keep the app responsive during network drops, and resolved a viewport jump bug caused by a conflict between Lenis smooth-scroll and React Router v6.",
-          "Deployed production builds to Firebase Hosting CDN; conducted cross-browser testing across Chrome, Safari, and Firefox.",
-        ],
-      },
-      {
-        title: "Lawyer–Client Management Application (Flutter / Android)",
-        points: [
-          "Designed and built a role-based Android application from scratch using Flutter and Dart, with Firebase Authentication, Cloud Firestore, and Firebase Storage as the backend.",
-          "Implemented separate dashboards for lawyers and clients — including case tracking, document vault, hearing scheduling, lawyer discovery, earnings monitoring, and a secure in-app messaging system.",
-          "Used Flutter Material 3 components throughout to ensure a consistent, responsive experience across Android devices.",
-        ],
-      },
-      {
-        title: "Field Executive Tracking System",
-        points: [
-          "Improved an existing Flutter-based field tracker app used by Ping IFF LLP's marketing team, adding role-based access (Employee / Admin), GPS accuracy filtering (discarding points over 60m accuracy or implying speeds above 55 m/s), and a geofence CRUD interface.",
-          "Built a custom OTP fallback service (OtpService) that generates 6-digit codes stored in Firestore with a 10-minute expiry and 5-attempt limit, as a workaround for Firebase Phone Auth SHA-1 registration issues on Android.",
-          "Subsequently developed Location Pinpoint Track — a lightweight web-based verification platform where field executives check in with a live photo and GPS coordinates, reverse-geocoded via the OpenStreetMap Nominatim API, stored as fraud-resistant proof-of-visit records.",
-        ],
-      },
-      {
-        title: "Automation, Data Engineering & QA",
-        points: [
-          "Built a QR Tag Template Management System that automates the positioning, allocation, and PDF generation of QR sticker sheets for manufacturing — reducing duplicate allocation errors.",
-          "Developed an Instagram media scraper using automated browser contexts to extract public image and video assets for marketing research.",
-          "Engineered a B2B data extraction pipeline using Python, BeautifulSoup, and Pandas to collect and clean approximately 6,064 verified car dealer records across Hyundai, Maruti Suzuki, Mahindra, Skoda, and MG Motor India — structured as a sales lead database.",
-          "Conducted systematic functional and regression testing of the @PlzPingMeBot Telegram bot, including Google Calendar sync, voice recognition, and reminder workflows.",
-        ],
-      },
+    id:    "web",
+    tab:   "PingME Web",
+    title: "PingME Website Ecosystem",
+    stack: ["React 18", "TypeScript", "Tailwind CSS", "Firebase", "Vite"],
+    summary:
+      "Refactored and shipped six core modules of a live privacy-tech web platform used by real customers.",
+    points: [
+      "Built Admin Panel with Firestore onSnapshot listeners for real-time order monitoring, protected by Firebase Auth route guards.",
+      "Rebuilt Home, About, Contact, Partners, and Products pages — responsive across mobile and desktop.",
+      "Resolved a Lenis smooth-scroll / React Router v6 viewport conflict affecting the checkout flow.",
+      "Deployed to Firebase Hosting CDN; verified cross-browser parity on Chrome, Safari, and Firefox.",
     ],
-    tags: [
-      "React 18", "TypeScript", "Flutter", "Dart", "Firebase", "Firestore",
-      "Python", "Pandas", "Git", "Tailwind CSS", "Vite", "Node.js",
+  },
+  {
+    id:    "mobile",
+    tab:   "Flutter App",
+    title: "Lawyer–Client Management App",
+    stack: ["Flutter", "Dart", "Firebase Auth", "Cloud Firestore", "Material 3"],
+    summary:
+      "Designed and built a role-based Android app from scratch — lawyers and clients each get a tailored workspace.",
+    points: [
+      "Implemented secure authentication, role-based routing, and separate dashboards for two user types.",
+      "Features: lawyer discovery, case tracking, document vault, hearing scheduling, and in-app messaging.",
+      "Used Flutter Material 3 components throughout for a consistent Android-native feel.",
+    ],
+  },
+  {
+    id:    "tracking",
+    tab:   "Field Tracker",
+    title: "Field Executive Tracking System",
+    stack: ["Flutter", "Riverpod", "Geolocator", "Firebase", "OpenStreetMap"],
+    summary:
+      "GPS tracking app for field sales teams, later evolved into a lightweight web check-in platform.",
+    points: [
+      "Added GPS accuracy filtering — drops points worse than 60m accuracy or implying speeds above 55 m/s.",
+      "Built a custom OTP fallback (OtpService) to handle Firebase Phone Auth SHA-1 issues on Android.",
+      "Implemented geofence CRUD and a live admin map with heat-map overlay and employee status board.",
+      "Evolved into Location Pinpoint Track — a web app using OpenStreetMap reverse-geocoding for fraud-resistant proof-of-visit records.",
+    ],
+  },
+  {
+    id:    "data",
+    tab:   "Automation",
+    title: "Data Engineering & Automation",
+    stack: ["Python", "Pandas", "BeautifulSoup", "Node.js", "QA Testing"],
+    summary:
+      "Extraction pipelines, internal tooling, and systematic QA — the engineering work that keeps operations running.",
+    points: [
+      "Built a QR Tag Template System for automating sticker positioning, QR allocation, and PDF generation at manufacturing scale.",
+      "Engineered a B2B data pipeline collecting and cleaning 6,064 verified car dealer records across 5 automotive brands.",
+      "Developed an Instagram media scraper for marketing research — rate-limited, public data only.",
+      "Conducted functional and regression testing of @PlzPingMeBot — covering reminders, Google Calendar sync, and voice recognition.",
     ],
   },
 ];
 
 export function ExperienceSection() {
+  const [active, setActive] = useState(0);
+  const proj = PROJECTS[active];
+
   return (
     <section
       id="experience"
@@ -72,101 +82,126 @@ export function ExperienceSection() {
           id="experience-heading"
         />
 
-        <div className="relative" role="list" aria-label="Work experience">
-          {/* Vertical line */}
-          <div
-            className="absolute left-0 top-2 bottom-2 w-px hidden md:block"
-            style={{ background: "linear-gradient(180deg, transparent, var(--border) 10%, var(--border) 90%, transparent)" }}
-            aria-hidden="true"
-          />
-
-          {EXPERIENCE.map((exp, idx) => (
-            <FadeIn key={idx} delay={0.05}>
+        {/* Company header card */}
+        <FadeIn delay={0.05}>
+          <div className="card p-6 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-4">
+              {/* Logo mark */}
               <div
-                role="listitem"
-                className="relative md:pl-10 py-8"
+                className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 font-display font-bold text-sm text-accent"
+                style={{ background: "rgba(124,111,247,0.1)", border: "1px solid rgba(124,111,247,0.2)" }}
+                aria-hidden="true"
               >
-                {/* Timeline dot */}
-                <div
-                  className="absolute left-[-4.5px] top-10 w-2.5 h-2.5 rounded-full border-2 hidden md:block"
+                P
+              </div>
+              <div>
+                <h3 className="font-display font-semibold text-text-primary text-lg" style={{ letterSpacing: "-0.02em" }}>
+                  Ping IFF LLP
+                </h3>
+                <p className="text-text-secondary text-sm">Software Engineering Intern · Chandigarh, India</p>
+                <p className="text-text-muted text-xs font-mono mt-0.5">Jan 2026 – Jun 2026 · 6 months</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 sm:justify-end">
+              {["React 18", "Flutter", "Firebase", "Python"].map((t) => (
+                <span key={t} className="tag">{t}</span>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* Tab + content layout */}
+        <FadeIn delay={0.1}>
+          <div className="flex flex-col md:flex-row gap-4" role="tablist" aria-label="Projects at Ping IFF LLP">
+
+            {/* Left — tab list */}
+            <div className="md:w-44 flex md:flex-col gap-1 overflow-x-auto md:overflow-visible pb-1 md:pb-0 flex-shrink-0">
+              {PROJECTS.map((p, i) => (
+                <button
+                  key={p.id}
+                  role="tab"
+                  aria-selected={active === i}
+                  aria-controls={`tab-panel-${p.id}`}
+                  onClick={() => setActive(i)}
+                  className="relative px-3 py-2.5 rounded-lg text-left text-sm font-medium whitespace-nowrap transition-colors duration-150 flex-shrink-0"
                   style={{
-                    borderColor: "var(--accent)",
-                    background: "var(--bg-primary)",
-                    boxShadow: "0 0 0 4px var(--bg-primary)",
+                    color: active === i ? "var(--text-primary)" : "var(--text-muted)",
+                    background: active === i ? "rgba(124,111,247,0.08)" : "transparent",
                   }}
-                  aria-hidden="true"
-                />
+                >
+                  {active === i && (
+                    <motion.span
+                      layoutId="tab-pill"
+                      className="absolute inset-0 rounded-lg"
+                      style={{
+                        background: "rgba(124,111,247,0.08)",
+                        border: "1px solid rgba(124,111,247,0.18)",
+                      }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      aria-hidden="true"
+                    />
+                  )}
+                  <span className="relative z-10">{p.tab}</span>
+                </button>
+              ))}
+            </div>
 
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-6">
-                  <div>
-                    <span className="font-mono text-text-muted text-xs tracking-wider">{exp.period}</span>
-                    <h3
-                      className="font-display font-bold text-2xl text-text-primary mt-1"
-                      style={{ letterSpacing: "-0.025em" }}
+            {/* Right — content panel */}
+            <div
+              id={`tab-panel-${proj.id}`}
+              role="tabpanel"
+              aria-label={proj.title}
+              className="flex-1 min-w-0"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={proj.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="card p-6 h-full"
+                >
+                  {/* Title + stack */}
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
+                    <h4
+                      className="font-display font-semibold text-text-primary text-xl"
+                      style={{ letterSpacing: "-0.02em" }}
                     >
-                      {exp.role}
-                    </h3>
-                    <p className="text-accent text-sm font-medium mt-0.5">{exp.company} · {exp.location}</p>
-                    <p className="text-text-muted text-xs mt-1">Mentor: {exp.mentor}</p>
+                      {proj.title}
+                    </h4>
                   </div>
-                  <span className="badge-neutral badge shrink-0">{exp.type}</span>
-                </div>
 
-                {/* Description */}
-                <p className="text-text-secondary text-sm leading-relaxed mb-8 max-w-2xl">
-                  {exp.description}
-                </p>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-5">{proj.summary}</p>
 
-                {/* Contributions */}
-                <div className="space-y-7">
-                  {exp.contributions.map((contrib, ci) => (
-                    <FadeIn key={ci} delay={0.1 + ci * 0.08}>
-                      <div className="card p-5">
-                        <h4
-                          className="font-display font-semibold text-text-primary text-base mb-4"
-                          style={{ letterSpacing: "-0.015em" }}
-                        >
-                          <span
-                            className="inline-block mr-2 font-mono text-xs text-accent"
-                            aria-hidden="true"
-                          >
-                            {String(ci + 1).padStart(2, "0")}
-                          </span>
-                          {contrib.title}
-                        </h4>
-                        <ul className="space-y-2.5" role="list">
-                          {contrib.points.map((point, pi) => (
-                            <li
-                              key={pi}
-                              className="flex items-start gap-2.5 text-sm text-text-secondary leading-relaxed"
-                            >
-                              <span
-                                className="mt-2 w-1 h-1 rounded-full flex-shrink-0"
-                                style={{ background: "var(--accent-dim)" }}
-                                aria-hidden="true"
-                              />
-                              {point}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </FadeIn>
-                  ))}
-                </div>
+                  {/* Points */}
+                  <ul className="space-y-3 mb-5" role="list">
+                    {proj.points.map((point, pi) => (
+                      <li
+                        key={pi}
+                        className="flex items-start gap-2.5 text-sm text-text-secondary leading-relaxed"
+                      >
+                        <span
+                          className="mt-[7px] w-1.5 h-1.5 rounded-full flex-shrink-0"
+                          style={{ background: "var(--accent)", opacity: 0.6 }}
+                          aria-hidden="true"
+                        />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
 
-                {/* Tech tags */}
-                <FadeIn delay={0.3}>
-                  <div className="mt-7 flex flex-wrap gap-2" aria-label="Technologies used">
-                    {exp.tags.map((tag) => (
+                  {/* Stack tags */}
+                  <div className="flex flex-wrap gap-2 pt-4 border-t" style={{ borderColor: "var(--border-subtle)" }}>
+                    {proj.stack.map((tag) => (
                       <span key={tag} className="tag">{tag}</span>
                     ))}
                   </div>
-                </FadeIn>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

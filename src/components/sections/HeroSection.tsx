@@ -152,7 +152,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.65, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          B.Tech CSE student at Punjab Engineering College, Chandigarh.
+          B.Tech CSE(Data Science) student at Punjab Engineering College, Chandigarh.
           Building production software — web, mobile, and the systems between them.
         </motion.p>
 
