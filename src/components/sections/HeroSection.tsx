@@ -4,42 +4,37 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { scrollToSection } from "@/lib/lenis";
-import { ArrowDown, ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Github, Linkedin, FileText } from "lucide-react";
 
-// Roles that cycle in the hero
 const ROLES = [
+  "Full Stack Developer",
   "Software Engineer",
   "AI Engineer",
-  "Full Stack Developer",
-  "Systems Thinker",
+  "Flutter Developer",
 ];
 
 function TypewriterRole() {
-  const [index, setIndex]     = useState(0);
-  const [displayed, setDisp]  = useState("");
-  const [deleting, setDel]    = useState(false);
-  const timeoutRef            = useRef<ReturnType<typeof setTimeout>>(null);
+  const [index, setIndex]    = useState(0);
+  const [displayed, setDisp] = useState("");
+  const [deleting, setDel]   = useState(false);
+  const timeoutRef           = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
     const current = ROLES[index];
-
     if (!deleting && displayed === current) {
-      timeoutRef.current = setTimeout(() => setDel(true), 2200);
+      timeoutRef.current = setTimeout(() => setDel(true), 2400);
     } else if (deleting && displayed === "") {
       setDel(false);
       setIndex((i) => (i + 1) % ROLES.length);
     } else if (!deleting) {
       timeoutRef.current = setTimeout(
-        () => setDisp(current.slice(0, displayed.length + 1)),
-        60
+        () => setDisp(current.slice(0, displayed.length + 1)), 65
       );
     } else {
       timeoutRef.current = setTimeout(
-        () => setDisp(current.slice(0, displayed.length - 1)),
-        35
+        () => setDisp(current.slice(0, displayed.length - 1)), 38
       );
     }
-
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [displayed, deleting, index]);
 
@@ -51,7 +46,6 @@ function TypewriterRole() {
   );
 }
 
-// Floating status badge
 function StatusBadge() {
   return (
     <motion.div
@@ -68,7 +62,7 @@ function StatusBadge() {
             style={{ background: "var(--success)" }}
           />
         </span>
-        <span>Open to opportunities</span>
+        <span>Open to full-time roles</span>
       </div>
     </motion.div>
   );
@@ -81,13 +75,8 @@ export function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  // Parallax on scroll out
   const y       = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  const handleScrollDown = () => {
-    scrollToSection("#about");
-  };
 
   return (
     <section
@@ -98,11 +87,10 @@ export function HeroSection() {
       style={{ paddingTop: "var(--nav-height)" }}
     >
       {/* Background layers */}
-      <div className="absolute inset-0 bg-grid opacity-100 pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-0 bg-grid pointer-events-none" aria-hidden="true" />
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
         style={{ background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124,111,247,0.1), transparent 70%)" }}
       />
-      {/* Subtle glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none" aria-hidden="true"
         style={{ background: "radial-gradient(circle, rgba(124,111,247,0.06) 0%, transparent 70%)", filter: "blur(40px)" }}
       />
@@ -110,12 +98,11 @@ export function HeroSection() {
         style={{ background: "radial-gradient(circle, rgba(168,156,248,0.04) 0%, transparent 70%)", filter: "blur(60px)" }}
       />
 
-      {/* Main content */}
       <motion.div
         style={{ y, opacity }}
         className="relative container-main flex flex-col items-center text-center z-10"
       >
-        {/* Status badge */}
+        {/* Status */}
         <div className="mb-8">
           <StatusBadge />
         </div>
@@ -144,6 +131,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          aria-hidden="true"
         >
           <div
             className="font-display font-semibold"
@@ -152,21 +140,20 @@ export function HeroSection() {
               lineHeight: 1.2,
               letterSpacing: "-0.02em",
             }}
-            aria-hidden="true"
           >
             <TypewriterRole />
           </div>
         </motion.div>
 
-        {/* Description */}
+        {/* Headline */}
         <motion.p
           className="text-text-secondary text-base md:text-lg max-w-xl leading-relaxed"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.65, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          Building products where engineering precision meets design sensibility.
-          From intelligent systems to polished interfaces.
+          B.Tech CSE student at Punjab Engineering College, Chandigarh.
+          Building production software — web, mobile, and the systems between them.
         </motion.p>
 
         {/* CTA row */}
@@ -182,8 +169,8 @@ export function HeroSection() {
             className="btn btn-primary px-6 py-3 text-sm"
             aria-label="View my projects"
           >
-            <Sparkles size={15} aria-hidden="true" />
             View Projects
+            <ArrowUpRight size={15} aria-hidden="true" />
           </MagneticButton>
 
           <MagneticButton
@@ -193,25 +180,63 @@ export function HeroSection() {
             aria-label="Get in touch"
           >
             Get in touch
-            <ArrowUpRight size={15} aria-hidden="true" />
           </MagneticButton>
+        </motion.div>
+
+        {/* Secondary links */}
+        <motion.div
+          className="mt-6 flex items-center gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.95, duration: 0.6 }}
+        >
+          <a
+            href="https://github.com/Harshit6057"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-text-muted hover:text-text-secondary transition-colors text-sm underline-hover"
+            aria-label="GitHub profile"
+          >
+            <Github size={14} aria-hidden="true" />
+            GitHub
+          </a>
+          <span className="w-px h-3 bg-border-subtle" aria-hidden="true" />
+          <a
+            href="https://linkedin.com/in/harshitbhoriya"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-text-muted hover:text-text-secondary transition-colors text-sm underline-hover"
+            aria-label="LinkedIn profile"
+          >
+            <Linkedin size={14} aria-hidden="true" />
+            LinkedIn
+          </a>
+          <span className="w-px h-3 bg-border-subtle" aria-hidden="true" />
+          <a
+            href="/resume.pdf"
+            className="flex items-center gap-1.5 text-text-muted hover:text-text-secondary transition-colors text-sm underline-hover"
+            aria-label="Download resume"
+          >
+            <FileText size={14} aria-hidden="true" />
+            Resume
+          </a>
         </motion.div>
 
         {/* Tech strip */}
         <motion.div
-          className="mt-16 flex flex-wrap items-center justify-center gap-3"
+          className="mt-14 flex flex-wrap items-center justify-center gap-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.0, duration: 0.8 }}
+          transition={{ delay: 1.05, duration: 0.8 }}
           aria-label="Primary technologies"
         >
-          {["TypeScript", "React", "Next.js", "Python", "Node.js", "AI/ML"].map((tech, i) => (
+          {["React", "TypeScript", "Flutter", "Firebase", "Python", "Next.js", "Node.js"].map((tech, i) => (
             <motion.span
               key={tech}
               className="tag"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.0 + i * 0.06, duration: 0.4 }}
+              transition={{ delay: 1.05 + i * 0.06, duration: 0.4 }}
             >
               {tech}
             </motion.span>
@@ -221,8 +246,8 @@ export function HeroSection() {
 
       {/* Scroll indicator */}
       <motion.button
-        onClick={handleScrollDown}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted hover:text-text-secondary transition-colors group"
+        onClick={() => scrollToSection("#about")}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted hover:text-text-secondary transition-colors"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}

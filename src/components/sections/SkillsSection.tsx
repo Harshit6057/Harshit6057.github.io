@@ -3,37 +3,36 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
-// Skill categories — populate in Phase 2
 const SKILL_GROUPS = [
   {
     category: "Languages",
     icon: "⌨️",
-    skills: ["TypeScript", "Python", "JavaScript", "Go", "SQL"],
+    skills: ["JavaScript", "TypeScript", "Dart", "Python", "HTML", "CSS"],
   },
   {
     category: "Frontend",
     icon: "🎨",
-    skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "HTML/CSS"],
+    skills: ["React 18", "Next.js", "Tailwind CSS", "Vite", "shadcn/ui", "Responsive UI"],
   },
   {
-    category: "Backend",
-    icon: "⚙️",
-    skills: ["Node.js", "FastAPI", "Express", "PostgreSQL", "Redis"],
+    category: "Mobile",
+    icon: "📱",
+    skills: ["Flutter", "Android", "Material 3", "flutter_riverpod", "Flutter Navigation"],
   },
   {
-    category: "AI / ML",
-    icon: "🤖",
-    skills: ["LangChain", "OpenAI API", "Hugging Face", "PyTorch", "RAG"],
-  },
-  {
-    category: "DevOps & Cloud",
+    category: "Backend & Cloud",
     icon: "☁️",
-    skills: ["Docker", "AWS", "GitHub Actions", "Vercel", "Linux"],
+    skills: ["Firebase", "Cloud Firestore", "Firebase Auth", "Firebase Hosting", "Firebase Storage", "Node.js"],
   },
   {
-    category: "Tools & Misc",
+    category: "Data & Automation",
+    icon: "🤖",
+    skills: ["Python", "Pandas", "BeautifulSoup", "Web Scraping", "Data Cleaning", "Automation Scripts"],
+  },
+  {
+    category: "Tools & Practices",
     icon: "🛠️",
-    skills: ["Git", "Figma", "REST APIs", "GraphQL", "WebSockets"],
+    skills: ["Git", "GitHub", "VS Code", "Android Studio", "REST APIs", "SDLC", "Agile", "Debugging"],
   },
 ];
 
@@ -50,7 +49,7 @@ export function SkillsSection() {
         <SectionHeader
           label="Skills"
           title="Tools of the craft"
-          description="Technologies and tools I work with. Refined in Phase 2."
+          description="Technologies I worked with during my internship and personal projects."
           align="center"
           id="skills-heading"
         />
@@ -67,7 +66,6 @@ export function SkillsSection() {
                 className="card p-6 h-full"
                 aria-label={`${category} skills`}
               >
-                {/* Header */}
                 <div className="flex items-center gap-3 mb-5">
                   <span
                     className="w-9 h-9 rounded-xl flex items-center justify-center text-base flex-shrink-0"
@@ -84,12 +82,9 @@ export function SkillsSection() {
                   </h3>
                 </div>
 
-                {/* Skill tags */}
                 <div className="flex flex-wrap gap-2" role="list" aria-label={`${category} technologies`}>
                   {skills.map((skill) => (
-                    <span key={skill} className="tag" role="listitem">
-                      {skill}
-                    </span>
+                    <span key={skill} className="tag" role="listitem">{skill}</span>
                   ))}
                 </div>
               </div>

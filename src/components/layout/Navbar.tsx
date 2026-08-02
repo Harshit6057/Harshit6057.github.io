@@ -6,11 +6,12 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 import { scrollToSection } from "@/lib/lenis";
 
 const NAV_LINKS = [
-  { label: "About",        href: "#about" },
-  { label: "Experience",   href: "#experience" },
-  { label: "Projects",     href: "#projects" },
-  { label: "Skills",       href: "#skills" },
-  { label: "Contact",      href: "#contact" },
+  { label: "About",      href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects",   href: "#projects" },
+  { label: "Skills",     href: "#skills" },
+  { label: "Timeline",   href: "#timeline" },
+  { label: "Contact",    href: "#contact" },
 ];
 
 export function Navbar() {

@@ -3,11 +3,16 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
-// Placeholder stat cards
 const STATS = [
-  { value: "—",  label: "Years Experience",  sublabel: "Add in Phase 2" },
-  { value: "—",  label: "Projects Built",     sublabel: "Add in Phase 2" },
-  { value: "—",  label: "Technologies",       sublabel: "Add in Phase 2" },
+  { value: "6",    label: "Month Internship",   sublabel: "Jan – Jun 2026" },
+  { value: "4",    label: "Production Projects", sublabel: "Shipped to live users" },
+  { value: "6K+",  label: "Records Extracted",   sublabel: "B2B data pipeline" },
+];
+
+const CURRENTLY = [
+  "🎓  B.Tech CSE, 3rd Year — Punjab Engineering College, Chandigarh",
+  "💼  Internship Graduate — Ping IFF LLP (Jan – Jun 2026)",
+  "🔭  Looking for full-time Software Engineering roles",
 ];
 
 export function AboutSection() {
@@ -17,7 +22,6 @@ export function AboutSection() {
       aria-labelledby="about-heading"
       className="section-pad relative"
     >
-      {/* Subtle top gradient */}
       <div className="absolute top-0 inset-x-0 h-px divider" aria-hidden="true" />
 
       <div className="container-main">
@@ -27,59 +31,58 @@ export function AboutSection() {
           <div>
             <SectionHeader
               label="About"
-              title="Building at the intersection of engineering and craft"
+              title="Engineer by practice, not just by degree"
               id="about-heading"
             />
 
             <div className="space-y-5 text-text-secondary text-base leading-relaxed">
               <FadeIn delay={0.1}>
                 <p>
-                  {/* Phase 2: Add real bio here */}
-                  Bio paragraph one will go here. Describe who you are, what drives you, and your engineering philosophy. Keep it genuine and specific.
+                  I&apos;m a third-year Computer Science student at Punjab Engineering College,
+                  Chandigarh. Most of what I know about software came from building real things
+                  — not from textbooks. I started with frontend work, got curious about how
+                  systems fit together, and ended up spending six months shipping production
+                  software at a tech startup.
                 </p>
               </FadeIn>
               <FadeIn delay={0.2}>
                 <p>
-                  {/* Phase 2: Add second paragraph */}
-                  Bio paragraph two — talk about your interests in AI, systems, or product thinking. Mention what you&apos;re currently focused on.
+                  At Ping IFF LLP, I worked across the full stack. I built React web modules
+                  for a live product used by real customers, developed a Flutter Android app
+                  from scratch, engineered a real-time field tracking system, and wrote
+                  automation scripts that processed over 6,000 business records. Every one of
+                  these shipped to production.
                 </p>
               </FadeIn>
               <FadeIn delay={0.3}>
                 <p>
-                  {/* Phase 2: Add closing thought */}
-                  Closing thought — what are you building toward? What matters to you outside of code?
+                  I care about code that&apos;s easy to maintain and systems that hold up under
+                  pressure. I&apos;m looking for a team where I can keep building things that matter.
                 </p>
               </FadeIn>
             </div>
 
-            {/* Currently section */}
+            {/* Currently */}
             <FadeIn delay={0.4} className="mt-10">
               <div className="card p-5 space-y-3">
-                <span className="section-label text-xs" style={{ fontSize: "0.625rem" }}>Currently</span>
-                <ul className="space-y-2 mt-2" role="list">
-                  {[
-                    "🎓  [Add current study / degree — Phase 2]",
-                    "💼  [Add current role / internship — Phase 2]",
-                    "🔭  [Add what you're exploring — Phase 2]",
-                  ].map((item, i) => (
-                    <li key={i} className="text-text-secondary text-sm flex items-start gap-2">
-                      {item}
-                    </li>
+                <span className="section-label" style={{ fontSize: "0.625rem" }}>Currently</span>
+                <ul className="space-y-2.5 mt-2" role="list">
+                  {CURRENTLY.map((item, i) => (
+                    <li key={i} className="text-text-secondary text-sm">{item}</li>
                   ))}
                 </ul>
               </div>
             </FadeIn>
           </div>
 
-          {/* Right — stats + visual */}
+          {/* Right — avatar + stats */}
           <div className="space-y-6">
-            {/* Avatar / visual placeholder */}
+            {/* Avatar placeholder */}
             <FadeIn delay={0.15} direction="left">
               <div
                 className="relative w-full aspect-square max-w-sm mx-auto lg:mx-0 rounded-3xl overflow-hidden card-elevated"
-                aria-label="Profile photo placeholder"
+                aria-label="Profile photo"
               >
-                {/* Gradient placeholder — swap for <Image> in Phase 2 */}
                 <div
                   className="w-full h-full"
                   style={{
@@ -88,20 +91,24 @@ export function AboutSection() {
                 />
                 <div className="absolute inset-0 bg-dots opacity-50" aria-hidden="true" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display font-bold text-6xl text-text-muted opacity-30 select-none">HB</span>
+                  <span className="font-display font-bold text-6xl text-text-muted opacity-30 select-none" aria-hidden="true">HB</span>
                 </div>
               </div>
             </FadeIn>
 
-            {/* Stats row */}
+            {/* Stats */}
             <div className="grid grid-cols-3 gap-4">
-              {STATS.map(({ value, label }, i) => (
+              {STATS.map(({ value, label, sublabel }, i) => (
                 <FadeIn key={label} delay={0.25 + i * 0.08} direction="up">
                   <div className="card p-4 text-center">
-                    <span className="font-display font-bold text-2xl text-text-primary block" style={{ letterSpacing: "-0.03em" }}>
+                    <span
+                      className="font-display font-bold text-2xl text-text-primary block"
+                      style={{ letterSpacing: "-0.03em" }}
+                    >
                       {value}
                     </span>
-                    <span className="text-text-muted text-xs mt-1 block leading-snug">{label}</span>
+                    <span className="text-text-secondary text-xs mt-1 block leading-snug">{label}</span>
+                    <span className="text-text-muted text-2xs mt-0.5 block leading-snug">{sublabel}</span>
                   </div>
                 </FadeIn>
               ))}
