@@ -1,93 +1,145 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ArrowUpRight, Github } from "lucide-react";
 
-// Placeholder project shape — will be populated in Phase 3
-const PROJECT_PLACEHOLDERS = Array.from({ length: 4 }, (_, i) => ({
-  id:          i,
-  title:       "Project Title",
-  description: "Project description goes here. What it does, why it matters, and what problem it solves. This will be populated in Phase 3.",
-  tags:        ["TypeScript", "React", "API"],
-  featured:    i < 2,
-  github:      "#",
-  live:        "#",
-}));
-
-function ProjectCard({
-  title,
-  description,
-  tags,
-  github,
-  live,
-  index,
-}: {
-  title: string;
+interface Project {
+  title:       string;
   description: string;
-  tags: string[];
-  github: string;
-  live: string;
-  index: number;
-}) {
+  tags:        string[];
+  github:      string;
+  live:        string;
+  image?:      string;   // path in /public/images/
+  featured?:   boolean;
+}
+
+const PROJECTS: Project[] = [
+  {
+    title:       "Justice For You — Lawyer-Client App",
+    description:
+      "A role-based Android app connecting lawyers and clients. Handles secure authentication, lawyer discovery, case tracking, document vault, hearing scheduling, and in-app messaging — built entirely with Flutter and Firebase.",
+    tags:        ["Flutter", "Dart", "Firebase", "Firestore", "Material 3"],
+    github:      "https://github.com/Harshit6057/legal_case",
+    live:        "https://lawcase-83ac4.web.app/",
+    image:       "/images/legal-case.png",
+    featured:    true,
+  },
+  // Phase 3 — add more projects here
+];
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const { title, description, tags, github, live, image } = project;
+
   return (
     <FadeIn delay={index * 0.08}>
       <motion.article
-        className="card p-6 h-full flex flex-col group"
+        className="card overflow-hidden h-full flex flex-col group"
         whileHover={{ y: -4 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         aria-label={`Project: ${title}`}
       >
-        {/* Top — icon placeholder */}
-        <div className="flex items-start justify-between mb-5">
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ background: "rgba(124,111,247,0.1)", border: "1px solid rgba(124,111,247,0.2)" }}
-            aria-hidden="true"
-          >
-            <span className="text-accent font-mono text-sm font-bold">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-          </div>
-
-          {/* Links */}
-          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            <a
-              href={github}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-white/06 transition-colors"
-              aria-label={`GitHub repository for ${title}`}
-              target="_blank"
-              rel="noopener noreferrer"
+        {/* Thumbnail */}
+        <div
+          className="relative w-full overflow-hidden"
+          style={{ aspectRatio: "16/9" }}
+        >
+          {image ? (
+            <Image
+              src={image}
+              alt={`Screenshot of ${title}`}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          ) : (
+            /* Gradient placeholder when no image provided */
+            <div
+              className="w-full h-full flex items-center justify-center"
+              style={{
+                background: "linear-gradient(135deg, rgba(124,111,247,0.12) 0%, rgba(61,56,128,0.18) 100%)",
+              }}
+              aria-hidden="true"
             >
-              <Github size={15} aria-hidden="true" />
-            </a>
+              <span className="font-mono text-2xl text-accent opacity-30 select-none">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+          )}
+
+          {/* Overlay with links — appears on hover */}
+          <div
+            className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-250"
+            style={{ background: "rgba(10,10,15,0.65)", backdropFilter: "blur(4px)" }}
+          >
             <a
               href={live}
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-white/06 transition-colors"
-              aria-label={`Live demo for ${title}`}
               target="_blank"
               rel="noopener noreferrer"
+              className="btn btn-primary px-4 py-2 text-xs"
+              aria-label={`Open live demo of ${title}`}
             >
-              <ArrowUpRight size={15} aria-hidden="true" />
+              Live Demo
+              <ArrowUpRight size={13} aria-hidden="true" />
+            </a>
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary px-4 py-2 text-xs"
+              aria-label={`View source code of ${title} on GitHub`}
+            >
+              <Github size={13} aria-hidden="true" />
+              Source
             </a>
           </div>
         </div>
 
         {/* Content */}
-        <h3
-          className="font-display font-semibold text-lg text-text-primary mb-2 group-hover:text-accent transition-colors duration-200"
-          style={{ letterSpacing: "-0.02em" }}
-        >
-          {title}
-        </h3>
-        <p className="text-text-secondary text-sm leading-relaxed flex-1">{description}</p>
+        <div className="p-5 flex flex-col flex-1">
+          <div className="flex items-start justify-between gap-2 mb-2">
+            <h3
+              className="font-display font-semibold text-text-primary text-base group-hover:text-accent transition-colors duration-200"
+              style={{ letterSpacing: "-0.018em" }}
+            >
+              {title}
+            </h3>
+            {/* Persistent icon links */}
+            <div className="flex items-center gap-1.5 flex-shrink-0 ml-2">
+              <a
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-7 h-7 rounded-md flex items-center justify-center text-text-muted hover:text-text-primary transition-colors"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-subtle)" }}
+                aria-label={`GitHub: ${title}`}
+              >
+                <Github size={13} aria-hidden="true" />
+              </a>
+              <a
+                href={live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-7 h-7 rounded-md flex items-center justify-center text-text-muted hover:text-text-primary transition-colors"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-subtle)" }}
+                aria-label={`Live: ${title}`}
+              >
+                <ArrowUpRight size={13} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
 
-        {/* Tags */}
-        <div className="mt-5 flex flex-wrap gap-2" aria-label="Technologies used">
-          {tags.map((tag) => (
-            <span key={tag} className="tag">{tag}</span>
-          ))}
+          <p className="text-text-secondary text-sm leading-relaxed flex-1 mb-4">
+            {description}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5" aria-label="Technologies used">
+            {tags.map((tag) => (
+              <span key={tag} className="tag">{tag}</span>
+            ))}
+          </div>
         </div>
       </motion.article>
     </FadeIn>
@@ -103,7 +155,6 @@ export function ProjectsSection() {
     >
       <div className="absolute top-0 inset-x-0 h-px divider" aria-hidden="true" />
 
-      {/* Background accent */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse 60% 40% at 70% 50%, rgba(124,111,247,0.04), transparent)" }}
@@ -115,40 +166,33 @@ export function ProjectsSection() {
           <SectionHeader
             label="Projects"
             title="Things I've built"
-            description="A selection of projects — full list added in Phase 3."
+            description="Selected work from internship and personal projects."
             id="projects-heading"
             className="mb-0"
           />
           <FadeIn delay={0.2}>
             <a
-              href="https://github.com"
+              href="https://github.com/Harshit6057"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary text-sm shrink-0"
               aria-label="View all projects on GitHub"
             >
-              View all on GitHub
+              GitHub Profile
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
           </FadeIn>
         </div>
 
-        {/* Project grid */}
+        {/* Projects — single column for now, widens when more are added */}
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          className={`grid gap-6 ${PROJECTS.length === 1 ? "grid-cols-1 max-w-2xl" : "grid-cols-1 md:grid-cols-2"}`}
           role="list"
           aria-label="Project list"
         >
-          {PROJECT_PLACEHOLDERS.map((project, i) => (
-            <div key={project.id} role="listitem">
-              <ProjectCard
-                title={project.title}
-                description={project.description}
-                tags={project.tags}
-                github={project.github}
-                live={project.live}
-                index={i}
-              />
+          {PROJECTS.map((project, i) => (
+            <div key={project.title} role="listitem">
+              <ProjectCard project={project} index={i} />
             </div>
           ))}
         </div>
