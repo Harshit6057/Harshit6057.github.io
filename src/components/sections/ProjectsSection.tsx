@@ -24,7 +24,7 @@ const PROJECTS: Project[] = [
     tags:        ["Flutter", "Dart", "Firebase", "Firestore", "Material 3"],
     github:      "https://github.com/Harshit6057/legal_case",
     live:        "https://lawcase-83ac4.web.app/",
-    image:       "/images/legal-case.png",
+    image:       "/images/Lawcase.png",
     featured:    true,
   },
   // Phase 3 — add more projects here
