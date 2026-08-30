@@ -5,8 +5,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const STATS = [
   { value: "6",    label: "Month Internship",   sublabel: "Jan – Jun 2026" },
-  { value: "4",    label: "Production Projects", sublabel: "Shipped to live users" },
-  { value: "6K+",  label: "Records Extracted",   sublabel: "B2B data pipeline" },
+  { value: "4",    label: "Production Projects", sublabel: "Shipped to live users" }
 ];
 
 const CURRENTLY = [
