@@ -27,7 +27,16 @@ const PROJECTS: Project[] = [
     image:       "/images/Lawcase.png",
     featured:    true,
   },
-  // Phase 3 — add more projects here
+  {
+    title:       "QR Locator — Asset Tracking via QR",
+    description:
+      "Scan a QR code, instantly see where an asset is. A lightweight web app that maps physical items to trackable location records — no app install needed. Built for real-world asset management and proof-of-location workflows.",
+    tags:        ["Next.js", "TypeScript", "QR Code", "Vercel", "Geolocation"],
+    github:      "https://github.com/Harshit6057/QR_Locator",
+    live:        "https://qr-locator.vercel.app/",
+    image:       "/images/QR_Locator.png",
+    featured:    true,
+  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
