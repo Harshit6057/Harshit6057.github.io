@@ -37,6 +37,16 @@ const PROJECTS: Project[] = [
     image:       "/images/QR_Locator.png",
     featured:    true,
   },
+  {
+    title:       "Quiver — Reddit Clone",
+    description:
+      "A full-stack Reddit-style community platform. Create communities, post content, comment, and vote — with a clean modern UI. React + Vite frontend, Express + Node.js API, Supabase for auth and database, all containerized with Docker.",
+    tags:        ["React", "TypeScript", "Vite", "Node.js", "Express", "Supabase", "Docker"],
+    github:      "https://github.com/Harshit6057/Quiver",
+    live:        "https://quiver-ecru.vercel.app/",
+    image:       "/images/Quiver.png",
+    featured:    true,
+  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
