@@ -47,6 +47,16 @@ const PROJECTS: Project[] = [
     image:       "/images/Quiver.png",
     featured:    true,
   },
+  {
+    title:       "LangGraph Chatbot — AI Agent with Tools",
+    description:
+      "A production-ready AI chatbot powered by LangGraph and Groq. Supports web search, stock price lookup, and calculator tools. Features full message editing, persistent conversation history via SQLite, in-memory caching, rate limiting, and streaming responses.",
+    tags:        ["Python", "LangGraph", "Groq API", "Streamlit", "LangChain", "SQLite"],
+    github:      "https://github.com/Harshit6057/Chatbot",
+    live:        "https://chatbot-langraph.streamlit.app/",
+    image:       "/images/Chatbot.png",
+    featured:    true,
+  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
