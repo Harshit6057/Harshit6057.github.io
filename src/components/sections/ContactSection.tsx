@@ -3,6 +3,7 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { ArrowUpRight, Mail, Github, Linkedin } from "lucide-react";
+import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 const SOCIAL_LINKS = [
   {
@@ -18,6 +19,20 @@ const SOCIAL_LINKS = [
     icon:   Linkedin,
     handle: "harshitbhoriya",
     desc:   "Professional profile",
+  },
+  {
+    label:  "Instagram",
+    href:   "https://www.instagram.com/harshit_23976/",
+    icon:   FaInstagram,
+    handle: "@harshit_23976",
+    desc:   "Personal updates",
+  },
+  {
+    label:  "X / Twitter",
+    href:   "https://x.com/Harshit2391976",
+    icon:   FaXTwitter,
+    handle: "@Harshit2391976",
+    desc:   "Thoughts & threads",
   },
   {
     label:  "Email",
@@ -96,7 +111,7 @@ export function ContactSection() {
 
         {/* Social links */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-3 gap-3"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
           role="list"
           aria-label="Contact and social links"
         >

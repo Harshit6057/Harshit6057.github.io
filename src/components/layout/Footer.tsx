@@ -2,12 +2,15 @@
 
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { scrollToSection } from "@/lib/lenis";
 
 const SOCIAL = [
-  { href: "https://github.com/Harshit6057",      icon: Github,   label: "GitHub"   },
-  { href: "https://linkedin.com/in/harshitbhoriya", icon: Linkedin, label: "LinkedIn" },
-  { href: "mailto:harshit@harshitbhoriya.me",    icon: Mail,     label: "Email"    },
+  { href: "https://github.com/Harshit6057",                  icon: Github,      label: "GitHub"    },
+  { href: "https://linkedin.com/in/harshitbhoriya",          icon: Linkedin,    label: "LinkedIn"  },
+  { href: "https://www.instagram.com/harshit_23976/",        icon: FaInstagram, label: "Instagram" },
+  { href: "https://x.com/Harshit2391976",                    icon: FaXTwitter,  label: "X"         },
+  { href: "mailto:harshit@harshitbhoriya.me",                icon: Mail,        label: "Email"     },
 ];
 
 export function Footer() {
