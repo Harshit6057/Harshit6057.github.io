@@ -135,8 +135,10 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <MagneticButton
               as="a"
-              href="/resume.pdf"
-              aria-label="Download resume"
+              href="https://www.linkedin.com/in/harshit-bhoriya-109057299/overlay/1788343587104/single-media-viewer/?profileId=ACoAAEgWlNkB1NVMGeJDMPtORhkGzxKZo8hc0T4"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View resume on LinkedIn"
               className="btn btn-secondary text-sm px-4 py-2"
             >
               Resume
@@ -241,11 +243,13 @@ export function Navbar() {
               {/* Footer CTA */}
               <div className="p-6 border-t" style={{ borderColor: "var(--border-subtle)" }}>
                 <a
-                  href="/resume.pdf"
+                  href="https://www.linkedin.com/in/harshit-bhoriya-109057299/overlay/1788343587104/single-media-viewer/?profileId=ACoAAEgWlNkB1NVMGeJDMPtORhkGzxKZo8hc0T4"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-primary w-full justify-center"
-                  aria-label="Download resume PDF"
+                  aria-label="View resume on LinkedIn"
                 >
-                  Download Resume
+                  View Resume
                 </a>
               </div>
             </motion.div>

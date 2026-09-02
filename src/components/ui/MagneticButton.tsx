@@ -9,6 +9,8 @@ interface MagneticButtonProps {
   strength?: number;
   as?: "button" | "a" | "div";
   href?: string;
+  target?: string;
+  rel?: string;
   onClick?: () => void;
   "aria-label"?: string;
 }
@@ -19,6 +21,8 @@ export function MagneticButton({
   strength = 0.3,
   as: Tag = "button",
   href,
+  target,
+  rel,
   onClick,
   "aria-label": ariaLabel,
 }: MagneticButtonProps) {
@@ -45,6 +49,8 @@ export function MagneticButton({
     Tag === "a" ? (
       <a
         href={href}
+        target={target}
+        rel={rel}
         onClick={onClick}
         className={className}
         aria-label={ariaLabel}

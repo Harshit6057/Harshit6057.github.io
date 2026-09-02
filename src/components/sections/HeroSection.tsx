@@ -213,9 +213,11 @@ export function HeroSection() {
           </a>
           <span className="w-px h-3 bg-border-subtle" aria-hidden="true" />
           <a
-            href="/resume.pdf"
+            href="https://www.linkedin.com/in/harshit-bhoriya-109057299/overlay/1788343587104/single-media-viewer/?profileId=ACoAAEgWlNkB1NVMGeJDMPtORhkGzxKZo8hc0T4"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-text-muted hover:text-text-secondary transition-colors text-sm underline-hover"
-            aria-label="Download resume"
+            aria-label="View resume on LinkedIn"
           >
             <FileText size={14} aria-hidden="true" />
             Resume
