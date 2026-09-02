@@ -11,8 +11,8 @@ interface Project {
   description: string;
   tags:        string[];
   github:      string;
-  live:        string;
-  image?:      string;   // path in /public/images/
+  live?:       string;   // optional — not all projects have a live demo
+  image?:      string;
   featured?:   boolean;
 }
 
@@ -55,6 +55,15 @@ const PROJECTS: Project[] = [
     github:      "https://github.com/Harshit6057/Chatbot",
     live:        "https://chatbot-langraph.streamlit.app/",
     image:       "/images/Chatbot.png",
+    featured:    true,
+  },
+  {
+    title:       "Road Accident Dashboard — Tableau",
+    description:
+      "An interactive Tableau dashboard analysing road accident fatality data. Visualises accident trends, severity breakdowns, and geographic patterns to surface insights for road safety decision-making.",
+    tags:        ["Tableau", "Data Visualisation", "Excel", "Data Analysis"],
+    github:      "https://github.com/Harshit6057/road-accident-dashboard",
+    image:       "/images/Road_Accident.png",
     featured:    true,
   },
 ];
@@ -103,16 +112,18 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-250"
             style={{ background: "rgba(10,10,15,0.65)", backdropFilter: "blur(4px)" }}
           >
-            <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary px-4 py-2 text-xs"
-              aria-label={`Open live demo of ${title}`}
-            >
-              Live Demo
-              <ArrowUpRight size={13} aria-hidden="true" />
-            </a>
+            {live && (
+              <a
+                href={live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary px-4 py-2 text-xs"
+                aria-label={`Open live demo of ${title}`}
+              >
+                Live Demo
+                <ArrowUpRight size={13} aria-hidden="true" />
+              </a>
+            )}
             <a
               href={github}
               target="_blank"
@@ -147,16 +158,18 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               >
                 <Github size={13} aria-hidden="true" />
               </a>
-              <a
-                href={live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-7 h-7 rounded-md flex items-center justify-center text-text-muted hover:text-text-primary transition-colors"
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-subtle)" }}
-                aria-label={`Live: ${title}`}
-              >
-                <ArrowUpRight size={13} aria-hidden="true" />
-              </a>
+              {live && (
+                <a
+                  href={live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-7 h-7 rounded-md flex items-center justify-center text-text-muted hover:text-text-primary transition-colors"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid var(--border-subtle)" }}
+                  aria-label={`Live: ${title}`}
+                >
+                  <ArrowUpRight size={13} aria-hidden="true" />
+                </a>
+              )}
             </div>
           </div>
 
