@@ -75,6 +75,15 @@ const PROJECTS: Project[] = [
     image:       "/images/Geolookup.png",
     featured:    true,
   },
+  {
+    title:       "Book Recommender System",
+    description:
+      "A Flask-based book recommendation engine using collaborative filtering and similarity scores. Includes an AI chat feature powered by Google Gemini so users can ask questions about any book — plot, characters, themes — directly in the app.",
+    tags:        ["Python", "Flask", "Pandas", "NumPy", "Gemini API", "Collaborative Filtering"],
+    github:      "https://github.com/Harshit6057/Book_Recommender_System",
+    image:       "/images/Book.png",
+    featured:    true,
+  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
