@@ -66,6 +66,15 @@ const PROJECTS: Project[] = [
     image:       "/images/Road_Accident.png",
     featured:    true,
   },
+  {
+    title:       "GeoLookup — Weather & Air Quality Dashboard",
+    description:
+      "A data analytics dashboard built for researchers, urban planners, and environmentalists. Provides actionable insights into weather patterns and air quality trends through interactive visualisations. Built as part of a Data Analytics & Visualisation coursework project.",
+    tags:        ["R", "Python", "Shiny", "Data Analytics", "Visualisation"],
+    github:      "https://github.com/Harshit6057/GeoLookup",
+    image:       "/images/Geolookup.png",
+    featured:    true,
+  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
