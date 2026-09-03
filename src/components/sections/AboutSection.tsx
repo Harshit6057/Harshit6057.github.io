@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
@@ -76,22 +77,26 @@ export function AboutSection() {
 
           {/* Right — avatar + stats */}
           <div className="space-y-6">
-            {/* Avatar placeholder */}
+            {/* Profile photo */}
             <FadeIn delay={0.15} direction="left">
               <div
                 className="relative w-full aspect-square max-w-sm mx-auto lg:mx-0 rounded-3xl overflow-hidden card-elevated"
-                aria-label="Profile photo"
+                aria-label="Harshit Bhoriya — profile photo"
               >
-                <div
-                  className="w-full h-full"
-                  style={{
-                    background: "linear-gradient(135deg, rgba(124,111,247,0.12) 0%, rgba(61,56,128,0.2) 50%, rgba(10,10,15,0.8) 100%)",
-                  }}
+                <Image
+                  src="/images/passport.jpeg"
+                  alt="Harshit Bhoriya"
+                  fill
+                  sizes="(max-width: 1024px) 384px, 384px"
+                  className="object-cover object-top"
+                  priority
                 />
-                <div className="absolute inset-0 bg-dots opacity-50" aria-hidden="true" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display font-bold text-6xl text-text-muted opacity-30 select-none" aria-hidden="true">HB</span>
-                </div>
+                {/* Subtle gradient overlay at bottom for depth */}
+                <div
+                  className="absolute inset-x-0 bottom-0 h-1/4 pointer-events-none"
+                  style={{ background: "linear-gradient(to top, rgba(10,10,15,0.4), transparent)" }}
+                  aria-hidden="true"
+                />
               </div>
             </FadeIn>
 
