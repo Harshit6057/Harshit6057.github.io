@@ -93,6 +93,15 @@ const PROJECTS: Project[] = [
     image:       "/images/Book.png",
     featured:    true,
   },
+  {
+    title:       "Exam Proctoring System",
+    description:
+      "A web-based online examination platform with real-time AI proctoring. Uses face recognition, head pose detection, multi-person alerts, and audio monitoring to ensure academic integrity. Covers 30+ exams across 6 domains with automated violation logging and downloadable reports.",
+    tags:        ["Python", "Flask", "OpenCV", "WebRTC", "SQLite", "face_recognition", "JWT"],
+    github:      "https://github.com/Harshit6057/Third_Draft_SE",
+    image:       "/images/Exam.png",
+    featured:    true,
+  },
 ];
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
