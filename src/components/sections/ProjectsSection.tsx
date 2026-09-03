@@ -28,6 +28,15 @@ const PROJECTS: Project[] = [
     featured:    true,
   },
   {
+    title:       "MEDBOT — AI Medical Diagnosis System",
+    description:
+      "An AI-powered medical chatbot for disease diagnosis using chest X-ray imaging. Runs a dual-model inference stack: a PyTorch CNN classifying chest X-rays (Normal, Pneumonia, COVID-19, Lung Opacity) and a PyTorch MURA model localising upper-limb fractures across 7 body parts. Clinicians get unified report generation, chat interpretation, and downloadable diagnostic reports.",
+    tags:        ["Next.js", "Python", "PyTorch", "MongoDB", "Node.js", "Deep Learning"],
+    github:      "https://github.com/Harshit6057/Disease_And_Fracture_Detection",
+    image:       "/images/MainUI.png",
+    featured:    true,
+  },
+  {
     title:       "QR Locator — Asset Tracking via QR",
     description:
       "Scan a QR code, instantly see where an asset is. A lightweight web app that maps physical items to trackable location records — no app install needed. Built for real-world asset management and proof-of-location workflows.",
